@@ -1,4 +1,4 @@
-package domain;
+package com.vega.springit.domains;
 
 import java.time.LocalDateTime;
 

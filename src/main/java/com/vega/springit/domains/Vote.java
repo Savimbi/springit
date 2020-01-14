@@ -1,4 +1,4 @@
-package domain;
+package com.vega.springit.domains;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -15,7 +15,7 @@ public class Vote {
 	@Id
 	@GeneratedValue
 	private Long id;
-	private Link link;
+	//private Link link;
 	private int vote;
 	
 	
