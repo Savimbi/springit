@@ -1,5 +1,6 @@
 package com.vega.springit;
 
+import org.ocpsoft.prettytime.PrettyTime;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -19,18 +20,9 @@ public class SpringitApplication {
 		SpringApplication.run(SpringitApplication.class, args);
 	}
 	
-	//@Bean
-	CommandLineRunner runner(LinkRepository linkRepository, CommentRepository commentRepository) {
-		return args ->{
-			Link link=new Link("Get started with spring boot 2", "https://dudosart.net");
-			linkRepository.save(link);
-			
-			Comment comment= new Comment("This is a wonderful spring boot course that I enjoyes too much!",link);
-			commentRepository.save(comment);
-			link.addComment(comment);
-			
-			System.out.println("We just inserted a link and comment");
-		};
+	@Bean
+	PrettyTime prettyTime() {
+		return new PrettyTime();
 	}
 
 }
