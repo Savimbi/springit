@@ -13,7 +13,7 @@ import com.vega.springit.repositorys.CommentRepository;
 import com.vega.springit.repositorys.LinkRepository;
 
 @SpringBootApplication
-@EnableJpaAuditing
+
 public class SpringitApplication {
 
 	public static void main(String[] args) {
