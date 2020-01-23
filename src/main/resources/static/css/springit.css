@@ -115,6 +115,11 @@ a.share {
 .comment .like {
     padding-left:10px;
 }
+button.nav-link {
+    background: #2D2A27;
+    border:none;
+    cursor: pointer;
+}
 
 
 /* Registration */
