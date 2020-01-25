@@ -1,15 +1,24 @@
 package com.vega.springit.domains;
 
+import java.time.LocalDateTime;
+import java.time.ZoneId;
+import java.util.Date;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import org.ocpsoft.prettytime.PrettyTime;
+
+import com.vega.springit.service.BeanUtil;
+
+import lombok.*;
 
 @Entity
-@Data
+@RequiredArgsConstructor
+@Getter
+@Setter
 @NoArgsConstructor
 public class Comment extends Auditable{
 
@@ -19,17 +28,23 @@ public class Comment extends Auditable{
 	@Id
 	@GeneratedValue
 	private Long id;
+	
+	@NonNull
 	private String body;
 	
-	
+	@NonNull
 	@ManyToOne
 	private Link link;
 	
-	public Comment(String body, Link link) {
-		// TODO Auto-generated constructor stub
-		this.body=body;
-		this.link=link;
-	}
+
 	
+	public String getPrettyTime() {
+	    PrettyTime pt = BeanUtil.getBean(PrettyTime.class);
+	    return pt.format(convertToDateViaInstant(getCreationDate()));
+	}
+
+	private Date convertToDateViaInstant(LocalDateTime dateToConvert) {
+	    return java.util.Date.from(dateToConvert.atZone(ZoneId.systemDefault()).toInstant());
+	}
 	
 }
