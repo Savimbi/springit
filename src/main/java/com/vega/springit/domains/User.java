@@ -5,8 +5,11 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import com.vega.springit.domains.validator.PasswordsMatch;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.util.*;
 import java.util.stream.Collectors;
@@ -17,7 +20,7 @@ import java.util.stream.Collectors;
 @Setter
 @ToString
 @NoArgsConstructor
-
+@PasswordsMatch
 public class User implements UserDetails{
 
 	@Id @GeneratedValue
@@ -44,6 +47,33 @@ public class User implements UserDetails{
     )
     private Set<Role> roles = new HashSet<>();
 	
+    @NonNull
+    @NotNull(message = "You must enter a first name.")
+    private String firstName;
+
+    @NonNull
+    @NotNull(message = "You must enter a lastName name.")
+    private String lastName;
+
+    @Transient
+    @Setter(AccessLevel.NONE)
+    private String fullName;
+
+    @NonNull
+    @NotNull
+    @Column(nullable = false, unique = true)
+    private String alias;
+    
+    @Transient
+    @NotEmpty(message="Please fill password confirmation !")
+    private String confirmPassword;
+    
+    private String activationCode;
+    
+
+    public String getFullName(){
+        return firstName + " " + lastName;
+    }
 	
 	public void addRole(Role role) {
 		roles.add(role);
