@@ -3,10 +3,20 @@ package com.vega.springit.controller;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 
+import com.vega.springit.service.UserService;
+
 @Controller
 public class AuthController {
 
-    @GetMapping("/login")
+	private UserService userService;
+	
+	
+	
+    public AuthController(UserService userService) {
+		this.userService = userService;
+	}
+
+	@GetMapping("/login")
     public String login(){
         return "auth/login";
     }
