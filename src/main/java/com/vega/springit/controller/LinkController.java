@@ -9,6 +9,8 @@ import javax.validation.Valid;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.security.access.annotation.Secured;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -25,6 +27,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.vega.springit.domains.Comment;
 import com.vega.springit.domains.Link;
+import com.vega.springit.domains.User;
 import com.vega.springit.repositorys.CommentRepository;
 
 import com.vega.springit.service.LinkService;
@@ -83,6 +86,7 @@ public class LinkController {
 			model.addAttribute("comment", comment);
 			model.addAttribute("link", currentLink);
 			model.addAttribute("success",model.containsAttribute("success"));
+			
 			return "links/view";
 		}else {
 			return "redirect:/";
@@ -104,12 +108,21 @@ public class LinkController {
     		return "links/submit";
     	}else {
     		//save your link
+    		Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+            if(principal instanceof UserDetails) {
+                link.setUser((User)principal);
     		linkService.save(link);
     		logger.info("New link was saved successfuly!");
     		redirectAttributes.addAttribute("id",link.getId())
     		.addFlashAttribute("success", true);
     		
     		return "redirect:/link/{id}";
+            } else {
+                logger.error("Unable to get logged in user credentials. Link insertion would fail..");
+                redirectAttributes
+                        .addFlashAttribute("error",true);
+                return "redirect:/"; // <div class="alert alert-warning" role="alert" th:if="${error}">
+            }
     	}
         
     }
