@@ -22,7 +22,7 @@ public class MailService {
     private final Logger log = LoggerFactory.getLogger(MailService.class);
     private final SpringTemplateEngine templateEngine;
     private final JavaMailSender javaMailSender;
-    private final String BASE_URL = "http://localhost:8080";
+    private final String BASE_URL = "http://springit2-env.xupwupmdrn.us-east-1.elasticbeanstalk.com";
 
     public MailService(JavaMailSender javaMailSender, SpringTemplateEngine templateEngine) {
         this.javaMailSender = javaMailSender;
