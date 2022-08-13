@@ -9,7 +9,7 @@
     <!-- Bootstrap core CSS -->
     <link rel="stylesheet" th:href="@{/libs/bootstrap/css/bootstrap.min.css}"/>
     <!-- Custom styles for this template -->
-    <link rel="stylesheet" th:href="@{/css/springit.css}">
+    <link rel="stylesheet" th:href="@{/css/dorna.css}">
     <!-- Google Fonts -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Oswald|Roboto" >
     <!-- Font Awesome (for icons) -->
@@ -21,8 +21,7 @@
     <nav class="navbar navbar-expand-lg navbar-dark bg-spring fixed-top" th:fragment="navigation">
         <div class="container">
             <a class="navbar-brand" href="/">
-                <i class="fa fa-leaf" aria-hidden="true"></i>
-                SPRINGIT
+                <img class="my-icon" th:src="@{/images/logoWhiteTrans.svg}" alt="dorna logo">
             </a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive"
                     aria-expanded="false" aria-label="Toggle navigation">
@@ -66,12 +65,18 @@
     </nav>
 
     <div class="jumbotron jumbotron-fluid" th:fragment="jumbotron">
-        <div class="container" align="center">
-            <h2 class="display-4">Spring Boot Reddit Clone</h2>
-            <p class="lead">This is a reddit clone built using <a href="#">Spring Boot 2</a>, <a href="#"></a>Spring Framework 5</a> & so many other great projects! If you would like to learn how to build this
-                application you can check out my course, <a href="#">Getting Started with Spring Boot 2</a>.</p>
-            <a href="http://www.github.com/cfaddict/springit" class="btn btn-success" target="_blank"><i class="fab fa-github"></i>  Github Repo</a>
-            <a href="https://therealdanvega.teachable.com/p/spring-boot-2" class="btn btn-success" target="_blank"><i class="fas fa-graduation-cap"></i> Spring Boot 2 Course</a>
+        <div class="overlay"></div>
+        <div class="inner container" align="center">
+            <h2 class="display-4">Dorna tech blog</h2>
+            <p class="lead">This is a space to share tech related topics focusing mostly on web and distributed systems. Articles here will focus on <a href="#">Spring Boot 2</a>, <a href="#"></a>Spring Framework 5</a> & so many other great topics! If you would like to learn with us, create account here.</p>
+            <div class="input-group">
+                <input type="text" class="form-control" placeholder="Search this blog">
+                <div class="input-group-append">
+                    <button class="btn btn-secondary" type="button">
+                        <i class="fa fa-search"></i>
+                    </button>
+                </div>
+            </div>
         </div>
     </div>
 
