@@ -1,20 +1,6 @@
-version: '3.1'
+version: '3.6'
 
 services:
-  db:
-    image: mysql
-    command: --default-authentication-plugin=mysql_native_password
-    restart: always
-    environment:
-      - MYSQL_ROOT_PASSWORD=password
-    ports:
-      - "3306:3306"
-    expose:
-      - "3306"
-    volumes:
-      - "./db:/var/lib/mysql"
-    networks:
-      - dorna-network
   dorna-server:
     container_name: dorna-app
     build:
@@ -25,8 +11,26 @@ services:
       - "18888:8888"
     expose:
       - "18888"
-    networks:
-      - dorna-network
+    environment:
+      MYSQL_HOST: mysqldb
+      MYSQL_USER: dornadbuser
+      MYSQL_PASSWORD: dornadbpass
+      MYSQL_PORT: 3306
+
+
+  db:
+    container_name: mysqldb
+    image: mysql
+    restart: always
+    environment:
+      - MYSQL_DATABASE=springit
+      - MYSQL_ROOT_PASSWORD=root
+    ports:
+      - "3306:3306"
+    expose:
+      - "3306"
+    volumes:
+      - "./db:/var/lib/mysql"
 
   adminer:
     image: adminer
@@ -35,6 +39,3 @@ services:
       - 9000:8080
 volumes:
   my-db:
-networks:
-  dorna-network:
-    driver: bridge
